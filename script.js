@@ -65,3 +65,12 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("visible"));
 }
+const rsvpForm = document.getElementById("rsvp-form");
+const rsvpSuccess = document.getElementById("rsvp-success");
+
+rsvpForm.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  rsvpSuccess.classList.add("visible");
+  rsvpForm.reset();
+});
