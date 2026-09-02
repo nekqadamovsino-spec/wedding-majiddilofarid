@@ -65,12 +65,40 @@ if ("IntersectionObserver" in window) {
 } else {
   revealItems.forEach((item) => item.classList.add("visible"));
 }
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyG68_3fcdj3_pUD1V-Vh8mU3ILk_boHBON3cDoyNUoBmKwvGUkguUpJXUdM59y66_d2w/exec";
+
 const rsvpForm = document.getElementById("rsvp-form");
 const rsvpSuccess = document.getElementById("rsvp-success");
+const rsvpButton = rsvpForm.querySelector("button");
 
-rsvpForm.addEventListener("submit", function (event) {
+rsvpForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  rsvpSuccess.classList.add("visible");
-  rsvpForm.reset();
+  const originalText = rsvpButton.textContent;
+
+  rsvpButton.disabled = true;
+  rsvpButton.textContent = "ОТПРАВЛЯЕМ...";
+
+  try {
+    const formData = new FormData(rsvpForm);
+
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      body: formData
+    });
+
+    rsvpSuccess.textContent = "Спасибо! Ваш ответ принят.";
+    rsvpSuccess.classList.add("visible");
+    rsvpForm.reset();
+  } catch (error) {
+    rsvpSuccess.textContent =
+      "Не удалось отправить ответ. Попробуйте ещё раз.";
+
+    rsvpSuccess.classList.add("visible");
+  } finally {
+    rsvpButton.disabled = false;
+    rsvpButton.textContent = originalText;
+  }
 });
