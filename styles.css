@@ -1270,3 +1270,92 @@ a {
     font-size: 16px;
   }
 }
+/* Красивый обратный отсчёт */
+.countdown__content {
+  padding: 90px 20px 120px;
+}
+
+.countdown__title {
+  margin: 0 0 45px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+}
+
+.countdown__grid {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.countdown__cell {
+  min-width: 0;
+  padding: 25px 10px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  background: rgba(40, 25, 18, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: center;
+}
+
+/* Убираем двоеточия */
+.countdown__cell:not(:last-child)::after {
+  display: none !important;
+  content: none !important;
+}
+
+.countdown__value {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(44px, 8vw, 70px);
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+}
+
+.countdown__label {
+  display: block;
+  margin-top: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Телефон */
+@media (max-width: 600px) {
+  .countdown__content {
+    width: calc(100% - 32px);
+    padding: 70px 0 100px;
+  }
+
+  .countdown__title {
+    margin-bottom: 35px;
+    font-size: 44px;
+  }
+
+  .countdown__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .countdown__cell {
+    padding: 22px 8px 18px;
+    border-radius: 16px;
+  }
+
+  .countdown__value {
+    font-size: 52px;
+  }
+
+  .countdown__label {
+    font-size: 12px;
+  }
+}
